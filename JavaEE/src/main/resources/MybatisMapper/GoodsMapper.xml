@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper就是相当于DAO的实现类-->
+<mapper namespace="project.dao.GoodsMapper">
+    <select id="queryAllGoods" resultType="Goods">
+        select * from goods
+    </select>
+
+    <select id="findGoodsById" resultType="Goods">
+        select * from goods where g_id = #{g_id};
+    </select>
+
+    <insert id="addGoods" parameterType="Goods">
+        insert into goods (g_name,g_price,g_type_name,g_amt) values (#{g_name},#{g_price},#{g_type_name},#{g_amt});
+    </insert>
+
+    <delete id="deleteGoodsById" parameterType="Integer">
+        delete from goods  where g_id = #{g_id};
+    </delete>
+
+    <update id="updateGoods" parameterType="Goods">
+        update goods set  g_name=#{g_name}, g_price=#{g_price}, g_type_name=#{g_type_name},g_amt=#{g_amt} where g_id=#{g_id};
+    </update>
+
+    <select id="selectGoodsFuzzyByName" parameterType="String" resultType="Goods">
+        select * from goods where g_name like concat('%',#{g_name},'%')
+    </select>
+
+    <select id="selectGoodsFuzzyByPrice" parameterType="Double" resultType="Goods">
+        select * from goods where g_price >= #{g_price}
+    </select>
+
+    <select id="selectGoodsFuzzyByType" parameterType="String" resultType="Goods">
+        select * from goods where g_type_name =#{g_type_name}
+    </select>
+
+    <select id="selectGoodsFuzzyByamt" parameterType="Integer" resultType="Goods">
+        select * from goods where g_amt >= #{g_amt}
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+            <!-- 取别名-->
+    <typeAliases>
+        <package name="project.pojo"/>
+    </typeAliases>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+    <mappers>
+        <!--将文件加到，mybatis配置文件里面给框架识别-->
+        <mapper resource="MybatisMapper/UserMapper.xml"></mapper>
+        <mapper resource="MybatisMapper/GoodsMapper.xml"></mapper>
+        <mapper resource="MybatisMapper/ApplyMapper.xml"></mapper>
+        <mapper resource="MybatisMapper/GoodsTypeMapper.xml"></mapper>
+        <mapper resource="MybatisMapper/GoodsTradeMapper.xml"></mapper>
+    </mappers>
+</configuration>

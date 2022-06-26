@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper就是相当于DAO的实现类-->
+<mapper namespace="project.dao.GoodsTypeMapper">
+    <select id="selectAllGoodsType" parameterType="int" resultType="Goods_type">
+        select * from goods_type ORDER BY g_type_id asc 
+    </select>
+
+    <select id="selectGoodsTypeByFuzzy" resultType="Goods_type">
+        select * from goods_type where g_type_name like concat('%',#{g_type_name},'%')
+    </select>
+    
+    <delete id="deleteGoodsTypeByList" >
+        delete from goods_type where g_type_id in
+        <foreach collection="list" item="list" open="(" separator="," close=")">
+            #{list}
+        </foreach>
+    </delete>
+    <delete id="deleteGoodsTypeById">
+        delete from goods_type where g_type_id = #{g_type_id};
+    </delete>
+
+    <insert id="addGoodType" parameterType="project.pojo.Goods_type">
+        insert into goods_type (g_type_name) values (#{g_type_name});
+    </insert>
+
+    <select id="selectGoodsType" resultType="Goods_type">
+        select * from goods_type where g_type_id = #{g_type_id};
+    </select>
+
+    <update id="updateGoodsType" parameterType="project.pojo.Goods_type">
+        update goods_type set  g_type_name=#{g_type_name}  where g_type_id = #{g_type_id};
+    </update>
+</mapper>

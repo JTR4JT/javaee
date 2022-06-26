@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper就是相当于DAO的实现类-->
+<mapper namespace="project.dao.ApplyMapper">
+    <insert id="addApply" parameterType="Apply">
+        insert into apply (u_id,ap_power) values (#{u_id},#{ap_power});
+    </insert>
+
+    <select id="findU_id" parameterType="int"
+            resultType="project.pojo.Apply">
+        select * from apply where u_id = #{u_id}
+    </select>
+    <select id="findap_power" parameterType="int"
+            resultType="project.pojo.Apply">
+        select * from apply where ap_power = #{ap_power}
+    </select>
+    <select id="find_state" parameterType="String"
+            resultType="project.pojo.Apply">
+        select * from apply where ap_state = "待处理"
+    </select>
+    <select id="findfi_state" parameterType="String"
+            resultType="project.pojo.Apply">
+        select * from apply where ap_state != "待处理"
+    </select>
+    <select id="findAll" parameterType="int"
+            resultType="project.pojo.Apply">
+        select * from apply
+    </select>
+    <update id="updateag_state" >
+        UPDATE apply SET ap_state = "已同意" where u_id = #{u_id}
+    </update>
+    <update id="updatede_state" >
+        UPDATE apply SET ap_state = "不同意" where u_id = #{u_id}
+    </update>
+    <update id="updateuser_type">
+        UPDATE user SET u_type = #{ap_power} where u_id = #{u_id}
+    </update>
+    <insert id="insertAp">
+        insert into apply (ap_id,u_id,ap_power,ap_date,ap_state)
+        value (#{ap_id,},#{u_id},#{ap_power},#{ap_date},#{ap_state})
+    </insert>
+
+    <delete id="Debyu_id">
+        DELETE from apply where u_id = #{u_id}
+    </delete>
+</mapper>

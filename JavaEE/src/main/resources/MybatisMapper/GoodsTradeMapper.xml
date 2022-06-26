@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper就是相当于DAO的实现类-->
+<mapper namespace="project.dao.GoodsTradeMapper">
+    <insert id="addGoodsTradeMsg" parameterType="goods_trade">
+        insert into goods_trade (g_trade_amt,g_trade_type,u_id,g_id) values (#{g_trade_amt},#{g_trade_type},#{u_id},#{g_id});
+    </insert>
+
+    <!--根据id查询图书信息 -->
+    <select id="findG_t_id" parameterType="int"
+            resultType="project.pojo.Goods_trade">
+        select * from goods_trade where g_trade_id = #{g_trade_id}
+    </select>
+    <!-- 查询货单所有信息 -->
+    <select id="findAllG_t" parameterType="int"
+            resultType="Goods_trade">
+        select * from goods_trade
+    </select>
+    <!--  通过用户id查询信息  -->
+    <select id="findByu_id" parameterType="int"
+            resultType="Goods_trade">
+        select * from goods_trade where u_id = #{u_id}
+    </select>
+    <!--  查询出库单信息  -->
+    <select id="find_out" parameterType="String"
+            resultType="Goods_trade">
+        select * from goods_trade where g_trade_type = "出库"
+    </select>
+    <!--  查询入库单信息  -->
+    <select id="find_in" parameterType="String"
+            resultType="Goods_trade">
+        select * from goods_trade where g_trade_type = "入库"
+    </select>
+    <!--  通过货物（种类）id查询信息  -->
+    <select id="findG_id" parameterType="int"
+            resultType="Goods_trade">
+        select * from goods_trade where g_id = #{g_id}
+    </select>
+    <delete id="DeG_t_id">
+       DELETE from goods_trade where g_trade_id = #{g_trade_id}
+   </delete>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper就是相当于DAO的实现类-->
+<mapper namespace="project.dao.UserMapper">
+    <select id="queryAllUser" resultType="User">
+        select * from user;
+    </select>
+
+    <!--注册用户-->
+    <insert id="addUser" parameterType="User">
+        insert into user (u_account, u_sex, u_idcard, u_psd, u_address, u_phone)
+        values
+        (#{u_account}, #{u_sex}, #{u_idcard}, #{u_psd}, #{u_address}, #{u_phone});
+    </insert>
+<!--    <select id="login" resultType="User">-->
+<!--        select * from user;-->
+<!--    </select>-->
+    
+    <update id="updateUser" parameterType="User">
+        update user set  u_account=#{u_account}, u_sex=#{u_sex}, u_idcard=#{u_idcard}, u_psd=#{u_psd}, u_address=#{u_address}, u_phone=#{u_phone} where u_id = #{u_id};
+    </update>
+
+    <!--根据id查询用户信息 -->
+    <select id="findU_id" parameterType="int"
+            resultType="project.pojo.User">
+        select * from user where u_id = #{u_id}
+    </select>
+
+    <select id="findU_idcard" parameterType="String"
+            resultType="project.pojo.User">
+        select * from user where u_idcard = #{u_idcard}
+    </select>
+
+    <select id="findU_type" parameterType="int"
+            resultType="project.pojo.User">
+        select * from user where u_type = #{u_type}
+    </select>
+
+    <select id="findU_sex" parameterType="String"
+            resultType="project.pojo.User">
+        select * from user where u_sex = #{u_sex}
+    </select>
+
+    <select id="findU_Allaccount" parameterType="String"
+            resultType="project.pojo.User">
+        select * from user where u_account = #{u_account}
+    </select>
+
+    <select id="findU_account" parameterType="String"
+            resultType="project.pojo.User">
+        select * from user where u_account = #{u_account}
+    </select>
+
+    <select id="findAllU" parameterType="int"
+            resultType="project.pojo.User">
+        select * from user
+    </select>
+
+    <delete id="DeU_id" parameterType="int">
+        DELETE from user where u_id = #{u_id}
+    </delete>
+
+    <delete id="DeAllU" >
+        DELETE from user
+    </delete>
+
+    <update id="Updatetuser" >
+        update user SET u_account=#{u_account},u_idcard=#{u_idcard},
+                        u_psd=#{u_psd},u_address=#{u_address},u_phone=#{u_phone},
+                        u_type=#{u_type}
+                        where u_id = #{u_id}
+    </update>
+    <update id="Updatetpower">
+        UPDATE user SET u_type = #{u_type} where u_id = #{u_id}
+    </update>
+</mapper>
